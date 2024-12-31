@@ -43,7 +43,7 @@ const Login = () => {
             {" "}
             Username
             <input
-              className="border text-xl p-2 w-96 rounded-lg font-normal"
+              className="mt-4px h-[40px] block w-[404px] border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500 sm:text-sm"
               {...register("username")}
               placeholder="Username"
               required
@@ -60,7 +60,7 @@ const Login = () => {
               {...register("password")}
               type="password"
               placeholder="Password"
-              className="border text-xl w-96 rounded-lg font-normal p-2"
+              className="mt-4px h-[40px] block w-[404px] border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:ring-green-500 focus:border-green-500 sm:text-sm"
               required
             />
           </label>
@@ -89,10 +89,9 @@ const Login = () => {
             <img src="/media/appleicon.png" alt="icon"/> Sign in with Apple
           </Link>
         </div>
-        <Link to={"/register"} className=" text-blue-700 text-xl flex gap-4">
-          <p className="text-black">Don’t have an account?</p> 
-          Sign Up
-        </Link>
+        <p className="mt-6 text-sm text-gray-500">
+          Don't have an account? <a href="/register" className="text-green-600 hover:underline">Sign in</a>
+      </p>
       </div>
       <div className="w-full h-full">
         <img
