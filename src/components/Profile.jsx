@@ -12,7 +12,7 @@ import { Image } from "lucide-react";
 const Profile=()=>{
     return (
         <>
-            <div className="py-[35px] px-[25px]">
+            <div className="py-[25px] px-[25px] h-full">
                 <div className="flex rounded-[45px] px-[8px] gap-[7px] items-center bg-white">
                     <Search size={23} color={"#CDCDCD"}/>
                     <input type="text" className="w-[85%] py-[5px] px-[8px] outline-none text-[15px]" placeholder="Search Here..."/>
@@ -29,13 +29,13 @@ const Profile=()=>{
                 <div className="flex py-[15px]">
                     <div className="w-1/2 flex flex-col items-center gap-[7px] border-r-2 border-slate-300">
                         <div className="p-[12px] bg-[#DCE8FF] rounded-full">
-                            <MessageCircle color={"#4399FF"} size={33}/>
+                            <MessageCircle color={"#4399FF"} size={30}/>
                         </div>
                         <p>Chat</p>
                     </div>
                     <div className="w-1/2 flex flex-col items-center gap-[7px]">
                         <div className="p-[12px] bg-[#DCE8FF] rounded-full">
-                            <Video color={"#4399FF"} size={33}/>
+                            <Video color={"#4399FF"} size={30}/>
                         </div>
                         <p>Video Call</p>
                     </div>
@@ -43,11 +43,11 @@ const Profile=()=>{
                 <div className="flex py-[15px]">
                     <div className="w-1/2 flex gap-[7px] items-center">
                         <User size={22}/>
-                        <p className="text-[14.5px]">View Friends</p>
+                        <p className="text-[14px]">View Friends</p>
                     </div>
                     <div className="w-1/2 flex gap-[7px] items-center">
                         <Heart size={22}/>
-                        <p className="text-[14.5px]">Add to Favourites</p>
+                        <p className="text-[14px]">Add to Favourites</p>
                     </div>
                 </div>
                 <div className="py-[15px]">
