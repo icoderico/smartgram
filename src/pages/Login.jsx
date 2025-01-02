@@ -12,14 +12,8 @@ const Login = () => {
     axios
       .post(`${BASE_URL}/login`, data)
       .then((res) => {
-        const { token } = res.data;
-        if (data.rememberMe) {
-          Cookies.set("authToken", token, { expires: 30 });
-        } else {
-          sessionStorage.setItem("authToken", token);
-        }
-        console.log(res.data, "user logged in");
-        navigate("/");
+        console.log(res, "user logged in");
+        // navigate("/");
       })
       .catch((err) => {
         alert("Invalid username or password");
@@ -80,18 +74,30 @@ const Login = () => {
             Login
           </button>
         </form>
-        <p className="text-gray-400">_____________________<b className="text-black">Or</b>_____________________</p>
+        <p className="text-gray-400">
+          _____________________<b className="text-black">Or</b>
+          _____________________
+        </p>
         <div className="grid grid-cols-2 gap-5">
-          <Link to={"/register"} className="flex gap-2 border px-3 p-2 rounded-lg">
-            <img src="/media/googleic.png" alt="icon"/> Sign in with Google
+          <Link
+            to={"/register"}
+            className="flex gap-2 border px-3 p-2 rounded-lg"
+          >
+            <img src="/media/googleic.png" alt="icon" /> Sign in with Google
           </Link>
-          <Link to={"/register"} className="flex gap-2 border px-3 p-2 rounded-lg">
-            <img src="/media/appleicon.png" alt="icon"/> Sign in with Apple
+          <Link
+            to={"/register"}
+            className="flex gap-2 border px-3 p-2 rounded-lg"
+          >
+            <img src="/media/appleicon.png" alt="icon" /> Sign in with Apple
           </Link>
         </div>
         <p className="mt-6 text-sm text-gray-500">
-          Don't have an account? <a href="/register" className="text-green-600 hover:underline">Sign Up</a>
-      </p>
+          Don't have an account?{" "}
+          <a href="/register" className="text-green-600 hover:underline">
+            Sign Up
+          </a>
+        </p>
       </div>
       <div className="w-full h-full">
         <img
