@@ -47,7 +47,7 @@ const showToastMessage = (message, type = "success") => {
        <div>
          <label
            htmlFor="name"
-           className="block text-lg font-semibold text-gray-700"
+           className="block text-lg font-semibold text-gray-700 mb-2"
          >
            Name
          </label>
@@ -61,7 +61,7 @@ const showToastMessage = (message, type = "success") => {
        <div>
          <label
            htmlFor="email"
-           className="block text-lg font-semibold text-gray-700"
+           className="block text-lg font-semibold text-gray-700 mb-2"
          >
            Email address
          </label>
@@ -75,7 +75,7 @@ const showToastMessage = (message, type = "success") => {
        <div>
          <label
            htmlFor="password"
-           className="block text-lg font-semibold text-gray-700"
+           className="block text-lg font-semibold text-gray-700 mb-2"
          >
            Password
          </label>

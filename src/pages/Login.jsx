@@ -5,11 +5,13 @@ import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../App";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import userStore from "../store/UserStore";
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+  const login = userStore((state) => state.login);
 
   const showToastMessage = (message, type = "success") => {
     toast[type](message, {
@@ -21,22 +23,22 @@ const Login = () => {
     setIsLoading(true);
     axios
       .post(`${BASE_URL}/login`, data)
-      .then((res) => {
-        console.log(res.data, "user logged in");
+      .then((res) => { 
+        login(res.data);
         setIsLoading(false);
-        showToastMessage("Login successful!", "success");
-        // navigate("/");
+        navigate("/chat");
+        console.log(res.data)
       })
       .catch((err) => {
         setIsLoading(false);
         showToastMessage("Invalid username or password", "error");
       });
-  };
+  }; 
 
   return (
     <>
       <div className="w-screen h-screen grid grid-cols-1 md:grid-cols-2">
-      <div className="w-full h-full flex flex-col gap-12 justify-center items-center bg-gray-50">
+      <div className="w-full h-full flex flex-col gap-9 justify-center items-center bg-gray-50">
         <div>
           <h1 className="text-3xl font-bold py-5">Welcome back!</h1>
           <p className="text-xl font-semibold">
@@ -44,7 +46,7 @@ const Login = () => {
           </p>
         </div>
         <form
-          className="flex flex-col gap-10"
+          className="flex flex-col gap-8"
           onSubmit={handleSubmit(onSubmit)}
         >
           <label className="flex flex-col gap-2 text-lg font-semibold text-gray-700">
