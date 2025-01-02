@@ -1,5 +1,5 @@
 import axios from "axios";
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../App";
@@ -7,21 +7,25 @@ import { BASE_URL } from "../App";
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+  const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (data) => {
+    setIsLoading(true);
     axios
       .post(`${BASE_URL}/login`, data)
       .then((res) => {
         console.log(res.data, "user logged in");
+        setIsLoading(false);
         // navigate("/");
       })
       .catch((err) => {
+        setIsLoading(false);
         alert("Invalid username or password");
       });
   };
 
   return (
-    <div className="w-screen h-screen grid grid-cols-2">
+    <div className="w-screen h-screen grid grid-cols-1 md:grid-cols-2">
       <div className="w-full h-full flex flex-col gap-12 justify-center items-center bg-gray-50">
         <div>
           <h1 className="text-3xl font-bold py-5">Welcome back!</h1>
@@ -68,10 +72,13 @@ const Login = () => {
           </label>
 
           <button
-            className="bg-green-800 text-white p-2 rounded-lg  hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
+            className={`bg-green-800 text-white p-2 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             type="submit"
+            disabled={isLoading} 
           >
-            Login
+            {isLoading ? "Logging in..." : "Login"}
           </button>
         </form>
         <p className="text-gray-400">
@@ -99,7 +106,7 @@ const Login = () => {
           </a>
         </p>
       </div>
-      <div className="w-full h-full">
+      <div className="hidden md:block w-full h-full">
         <img
           src="/media/login1.png"
           alt="picture"
