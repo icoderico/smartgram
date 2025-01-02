@@ -3,11 +3,19 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../App";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Login = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
+
+  const showToastMessage = (message, type = "success") => {
+    toast[type](message, {
+      position: "top-right",
+    });
+  };
 
   const onSubmit = (data) => {
     setIsLoading(true);
@@ -16,16 +24,18 @@ const Login = () => {
       .then((res) => {
         console.log(res.data, "user logged in");
         setIsLoading(false);
+        showToastMessage("Login successful!", "success");
         // navigate("/");
       })
       .catch((err) => {
         setIsLoading(false);
-        alert("Invalid username or password");
+        showToastMessage("Invalid username or password", "error");
       });
   };
 
   return (
-    <div className="w-screen h-screen grid grid-cols-1 md:grid-cols-2">
+    <>
+      <div className="w-screen h-screen grid grid-cols-1 md:grid-cols-2">
       <div className="w-full h-full flex flex-col gap-12 justify-center items-center bg-gray-50">
         <div>
           <h1 className="text-3xl font-bold py-5">Welcome back!</h1>
@@ -114,6 +124,8 @@ const Login = () => {
         />
       </div>
     </div>
+    <ToastContainer />
+    </>
   );
 };
 
