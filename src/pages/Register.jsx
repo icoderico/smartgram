@@ -37,9 +37,11 @@ const showToastMessage = (message, type = "success") => {
   return (
     <>
     <div className="w-screen h-screen grid grid-cols-1 md:grid-cols-2">
-   
-   <div className="w-full h-full flex flex-col gap-9 justify-center items-center bg-gray-50">
-     <h1 className="text-3xl font-bold">Get Started Now!</h1>
+    <div className="w-full h-full flex justify-center items-center bg-gray-50 p-6">
+     <div className="flex flex-col gap-9 justify-center items-center">
+     <div className="self-start">
+      <h1 className="text-3xl font-bold">Get Started Now!</h1>
+     </div>
      <form
        className="flex flex-col gap-8 w-full max-w-md"
        onSubmit={handleSubmit(onSubmit)}
@@ -133,6 +135,7 @@ const showToastMessage = (message, type = "success") => {
          Sign in
        </a>
      </p>
+     </div>
    </div>
 
    <div className="hidden md:block w-full h-full">

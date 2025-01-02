@@ -38,7 +38,8 @@ const Login = () => {
   return (
     <>
       <div className="w-screen h-screen grid grid-cols-1 md:grid-cols-2">
-      <div className="w-full h-full flex flex-col gap-9 justify-center items-center bg-gray-50">
+      <div className="w-full h-full flex justify-center items-center bg-gray-50 p-6">
+        <div className="flex flex-col gap-9 justify-center items-center">
         <div>
           <h1 className="text-3xl font-bold py-5">Welcome back!</h1>
           <p className="text-xl font-semibold">
@@ -117,6 +118,7 @@ const Login = () => {
             Sign Up
           </a>
         </p>
+        </div>
       </div>
       <div className="hidden md:block w-full h-full">
         <img
