@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { Link, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../App";
@@ -7,16 +7,20 @@ import axios from "axios";
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
+const [isLoading, setIsLoading] = useState(false);
 
   const onSubmit = (data) => {
+    setIsLoading(true);
     axios
       .post(`${BASE_URL}/users`, data)
       .then((res) => {
         console.log(res.data, "user created");
         navigate("/login");
+        setIsLoading(false);
       })
       .catch((err) => {
         alert("User already exists or email already exists");
+        setIsLoading(false);
       });
   };
 
@@ -85,10 +89,13 @@ const Register = () => {
             </label>
           </div>
           <button
+            className={`bg-green-800 text-white p-2 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none ${
+              isLoading ? "opacity-50 cursor-not-allowed" : ""
+            }`}
             type="submit"
-            className="w-full bg-green-800 text-white p-2 rounded-lg hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none"
+            disabled={isLoading} 
           >
-            Signup
+            {isLoading ? "signing up..." : "Signup"}
           </button>
         </form>
         <p className="text-gray-400">
