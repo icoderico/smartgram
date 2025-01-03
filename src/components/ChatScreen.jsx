@@ -1,6 +1,4 @@
-const ChatScreen=()=>{
-    return (
-        <></>
-    )
-}
-export default ChatScreen
+const ChatScreen = () => {
+  return <></>;
+};
+export default ChatScreen;

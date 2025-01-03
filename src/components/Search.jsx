@@ -1,44 +1,66 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import useDebounce from "./useDebounce";
 
 const Search = () => {
   const [searchTerm, setSearchTerm] = useState("");
+  const [apiUsers, setApiUsers] = useState([]);
   const debouncedSearchTerm = useDebounce(searchTerm, 300);
 
-  const contacts = [
+  const localContacts = [
     {
       name: "Lisa Roy",
       message: "Hi, are you coming Tomorrow?",
-      image: "src/assets/53edc66922cb46d2770e0d27a2271dbd.jpg",
     },
     {
       name: "Jamie Taylor",
       message: "Nice one. Will do it tomorrow.",
-      image: "src/assets/jamie.jpg",
     },
     {
       name: "Jason Roy",
       message: "That’s Great. I am Looking forward to having a great start.",
-      image: "src/assets/jason.jpg",
     },
     {
       name: "Amy Frost",
       message: "Hi, will you start working on the chat app right now?",
-      image: "src/assets/amy frost.jpg",
     },
     {
       name: "Paul Wilson",
       message: "See you tomorrow champ",
-      image: "src/assets/paul.jpg",
     },
     {
       name: "Ana Williams",
       message: "??",
-      image: "src/assets/ana williams.jpg",
     },
   ];
 
-  const filteredContacts = contacts.filter((contact) =>
+  useEffect(() => {
+    const fetchApiUsers = async () => {
+      try {
+        const response = await fetch(
+          "https://smartgram-server.vercel.app/api/users"
+        );
+        const users = await response.json();
+
+        const formattedUsers = users.map((user) => ({
+          name: user.username || "Unknown User",
+          message: user.email || "No email provided",
+        }));
+
+        setApiUsers(formattedUsers);
+      } catch (error) {
+        console.error("Error fetching users from API:", error);
+      }
+    };
+
+    fetchApiUsers();
+  }, []);
+
+  const combinedContacts = [
+    ...localContacts,
+    ...apiUsers.filter((user) => user.name),
+  ];
+
+  const filteredContacts = combinedContacts.filter((contact) =>
     contact.name.toLowerCase().includes(debouncedSearchTerm.toLowerCase())
   );
 
@@ -51,7 +73,7 @@ const Search = () => {
       <div className="flex items-center bg-[#F0F0F0] p-4 border-b border-gray-300">
         <div className="w-16 h-16 rounded-full overflow-hidden">
           <img
-            src="src/assets/8e2becda16e2f3abc85e162b63a8d214.jpg"
+            src="src/assets/profile-icon-design-free-vector.jpg"
             alt="User Icon"
             className="w-full h-full object-cover"
           />
@@ -75,11 +97,11 @@ const Search = () => {
 
       <div className="flex-1 overflow-y-hidden">
         <ul className="p-4 space-y-4">
-          {filteredContacts.map(({ name, message, image }, index) => (
+          {filteredContacts.map(({ name, message }, index) => (
             <li key={index} className="flex items-start space-x-4">
               <div className="w-12 h-12 rounded-full overflow-hidden flex-shrink-0">
                 <img
-                  src={image}
+                  src="src/assets/profile-icon-design-free-vector.jpg"
                   alt={name}
                   className="w-full h-full object-cover"
                 />

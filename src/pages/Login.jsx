@@ -23,17 +23,17 @@ const Login = () => {
     setIsLoading(true);
     axios
       .post(`${BASE_URL}/login`, data)
-      .then((res) => { 
+      .then((res) => {
         login(res.data);
         setIsLoading(false);
-        navigate("/chat");
+        navigate("/");
         console.log(res.data)
       })
       .catch((err) => {
         setIsLoading(false);
         showToastMessage("Invalid username or password", "error");
       });
-  }; 
+  };
 
   return (
     <>
@@ -89,7 +89,7 @@ const Login = () => {
               isLoading ? "opacity-50 cursor-not-allowed" : ""
             }`}
             type="submit"
-            disabled={isLoading} 
+            disabled={isLoading}
           >
             {isLoading ? "Logging in..." : "Login"}
           </button>
@@ -134,3 +134,4 @@ const Login = () => {
 };
 
 export default Login;
+

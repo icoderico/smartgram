@@ -6,7 +6,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-
 const Register = () => {
   const { register, handleSubmit } = useForm();
   const navigate = useNavigate();
@@ -28,7 +27,7 @@ const showToastMessage = (message, type = "success") => {
         showToastMessage("user created", "success");
       })
       .catch((err) => {
-        
+
         setIsLoading(false);
         showToastMessage("User already exists or email already exists", "error");
       });
@@ -106,7 +105,7 @@ const showToastMessage = (message, type = "success") => {
            isLoading ? "opacity-50 cursor-not-allowed" : ""
          }`}
          type="submit"
-         disabled={isLoading} 
+         disabled={isLoading}
        >
          {isLoading ? "signing up..." : "Signup"}
        </button>
@@ -152,4 +151,5 @@ const showToastMessage = (message, type = "success") => {
 };
 
 export default Register;
+
 
